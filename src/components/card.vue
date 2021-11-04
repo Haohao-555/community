@@ -6,7 +6,7 @@
 -->
 <template>
   <div class="card">
-     <div class="card-container">
+        <div class="card-container">
          <div class="info">
             <img :src="picture" alt="">
             <span class="nickname">{{nickName}}</span>
@@ -16,16 +16,20 @@
             <p>{{content}}</p>
          </div>
          <div class="img-container">
-             <img v-for="(item, index) in imgList"  :key="index" :src="item.url" alt="">
-         </div>
-        
-     </div>
+           <van-grid :column-num="3" square :border="false">
+             <van-grid-item v-for="(item, index) in imgList" :key="index">
+                  <img  :src="item.url" alt="">
+             </van-grid-item>
+           </van-grid>
+          </div>
+       </div>
   </div>
 </template>
 <script>
   export default {
       name: "card",
       props: {
+        data: Array,
         id: Number,
         content: String,
         created: String,
@@ -33,7 +37,6 @@
         picture: String,
         userName: String,
         imgList: Array,
-        flag: Boolean,
       }
   }
 </script>
@@ -68,7 +71,6 @@
             left: 50px;
             font-size: 10px;
             color: #333;
-            
          }
          .text{
             margin-top: 12px;
@@ -81,7 +83,6 @@
            margin: 12px auto;
            width: 318px;
            img {
-             margin-right: 6px;
              margin-bottom: 6px;
            }
          }

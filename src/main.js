@@ -4,21 +4,49 @@ import router from './router'
 import 'amfe-flexible'
 import axios from 'axios'
 import VueCookie from 'vue-cookie'
-import { Message } from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
+import store from './store/index'
+import { Toast, 
+         Notify, 
+         PullRefresh, 
+         Search, 
+         Sticky, 
+         Tabbar, 
+         TabbarItem, 
+         Icon, 
+         Cell, 
+         CellGroup,
+         Grid,
+         GridItem
+} from 'vant';
+import { Image as VanImage } from 'vant';
+import 'vant/lib/index.css'
+// 导入animate动画
+import 'animate.css'
 
 Vue.config.productionTip = false
 
+Vue.use(Toast);
+Vue.use(Notify);
+Vue.use(PullRefresh);
+Vue.use(Search);
+Vue.use(Sticky);
+Vue.use(Tabbar);
+Vue.use(TabbarItem);
+Vue.use(Icon);
+Vue.use(Cell);
+Vue.use(CellGroup);
+Vue.use(VanImage);
+Vue.use(Grid)
+Vue.use(GridItem)
 // mock开关
 const mock = true;
-if(mock){
+if (mock) {
   require('./mock/mockApi');
 }
 
 //注册 cookie
 Vue.use(VueCookie);
 
-Vue.prototype.$message = Message;
 
 Vue.prototype.axios = axios
 Vue.prototype.$cookie = VueCookie;
@@ -38,5 +66,6 @@ axios.interceptors.response.use(function (response) {
 
 new Vue({
   router,
+  store,
   render: h => h(App),
 }).$mount('#app')

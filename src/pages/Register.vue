@@ -7,48 +7,54 @@
 <template>
   <div class="register">
     <div class="bg"></div>
-    <div class="container">
+    <div :class="['container', loginState? '' : 'pad']">
       <div class="form-container" v-if="!loginState">
-        <div class="title">注册</div>
-        <div class="row">
-          <input type="text" placeholder="请输入账号" v-model="userName">
-        </div>
-        <div class="row">
-          <input type="password" placeholder="请输入密码" v-model="password">
-        </div>
-        <div class="row"> 
-          <input type="password" placeholder="请再次输入密码" v-model="password1">
-        </div>
-        <div class="row"> 
-           <div class="option">
-              <input type="radio" value="3" v-model="gender" id="secrecy"> 
+          <div class="title">注册</div>
+          <div class="row">
+            <input type="text" placeholder="请输入账号" v-model="userName">
+          </div>
+          <div class="row">
+            <input type="password" placeholder="请输入密码" v-model="password">
+          </div>
+          <div class="row">
+            <input type="password" placeholder="请再次输入密码" v-model="password1">
+          </div>
+          <div class="row">
+            <div class="option">
+              <input type="radio" value="3" v-model="gender" id="secrecy">
               <label for="secrecy">保密</label>
-           </div>
-           <div class="option">
-              <input type="radio" value="1"  v-model="gender" id="boy"> 
+            </div>
+            <div class="option">
+              <input type="radio" value="1" v-model="gender" id="boy">
               <label for="boy">男</label>
-           </div>
-          <div class="option">
-              <input type="radio" value="2"  v-model="gender" id="girl"> 
+            </div>
+            <div class="option">
+              <input type="radio" value="2" v-model="gender" id="girl">
               <label for="girl">女</label>
-           </div>
-        </div>
+            </div>
+         </div>
         <button @click="register" class="btn">注册</button>
       </div>
       <div class="login" v-if="loginState">
         <div class="ava">
-            <img :src="avaUrl" alt="">
+          <img :src="avaUrl" alt="">
+        </div>
+        <div class="info">
+          <div class="ava">
+            <img :src="user.picture" alt="">
           </div>
-          <div class="info">
-              <span>朋友您已登录</span>
-              <span @click="back">返回到主页</span>
-          </div>
+          <span>{{user.nickName}}您已登录</span>
+          <span @click="back">主页</span>
+        </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-import { req_register, req_existAccount } from "../network/user/index.js";
+import {
+  req_register,
+  req_existAccount,
+} from "../network/user/index.js";
 import constant from "../conf/constant";
 export default {
   name: "Register",
@@ -66,6 +72,14 @@ export default {
 
       loginState: false,
       avaUrl: "",
+
+      user: {
+        id: 0,
+        city: "",
+        nickName: "",
+        picture: "",
+        userName: "",
+      },
     };
   },
   // 属性监听（判断用户名是否存在，及密码是否一致）
@@ -78,11 +92,11 @@ export default {
           this.isExistUserName = false;
         } else {
           this.isExistUserName = true;
-          this.$message({
-            showClose: true,
-            message: "存在相同用户名",
-            type: "warning",
-          });
+           this.$notify({
+              message: '存在相同账号',
+              color: '#ad0000',
+              background: '#fff',
+           })
         }
       });
     },
@@ -102,11 +116,11 @@ export default {
     },
     isExistPassword: function() {
       if (!this.isExistPassword) {
-        this.$message({
-          showClose: true,
-          message: "密码不一致",
-          type: "warning",
-        });
+         this.$notify({
+              message: '密码不一致',
+              color: '#ad0000',
+              background: '#fff',
+          })
       }
     },
   },
@@ -116,11 +130,12 @@ export default {
   methods: {
     // 判断是否登录
     isLogin() {
-       if(this.$cookie.get(constant.COOKIE)) {
-          this.loginState = true;
-       }else {
-         this.loginState = false;
-       }
+      if (this.$cookie.get(constant.COOKIE)) {
+        this.loginState = true;
+        this.user = this.$store.state.userInfo;
+      } else {
+        this.loginState = false;
+      }
     },
     register() {
       if (this.isExistUserName == false && this.isExistPassword == true) {
@@ -131,19 +146,28 @@ export default {
           gender: parseInt(gender),
         }).then(res => {
           if (res.errno && res.errno == 10009) {
-            this.$message.error("你可能有错误哦!");
+             this.$notify({
+              message: '你可能有错误哦!',
+              color: '#ad0000',
+              background: '#fff',
+            })
           } else {
             this.$message.success("注册成功");
             this.$router.push("/login");
           }
         });
       } else {
-        this.$message({
-          showClose: true,
-          message: "您可能还有错误哦！",
-          type: "warning",
-        });
+         this.$notify({
+            message: '你可能有错误哦!',
+            color: '#ad0000',
+            background: '#fff',
+         })
       }
+    },
+    back() {
+      this.$router.push({
+        path: "/index",
+      });
     },
   },
 };
@@ -156,24 +180,20 @@ export default {
   z-index: 3;
   .bg {
     position: absolute;
-    background-size: cover;
-    background-position: 50%;
     width: 100%;
     height: 100%;
-    overflow: hidden;
     z-index: -1;
-    background-image: url(https://i.loli.net/2021/11/03/QBF286mTRgdaDfJ.png);
+    background-color: #c04d00;
   }
   .container {
-    padding-top: 150px;
     box-sizing: border-box;
-    .title {
-      text-align: center;
-      color: #fff;
-      line-height: 30px;
-      margin-bottom: 20px;
-    }
     .form-container {
+      .title {
+        text-align: center;
+        color: #fff;
+        line-height: 30px;
+        margin-bottom: 20px;
+      }
       background-color: rgba($color: #000000, $alpha: 0.4);
       width: 300px;
       margin: 0 auto;
@@ -201,6 +221,7 @@ export default {
             label {
               font-size: 14px;
               margin-left: 12px;
+              color: #fff;
             }
           }
         }
@@ -209,7 +230,6 @@ export default {
         width: 200px;
         height: 40px;
         border-radius: 12px;
-        padding: 12px 20px;
         border: none;
         background: none;
         margin: 0 auto;
@@ -219,7 +239,6 @@ export default {
       }
     }
     .login {
-      padding-top: 100px;
       .ava {
         height: 120px;
         width: 120px;
@@ -233,6 +252,19 @@ export default {
         }
       }
       .info {
+        .ava {
+          height: 120px;
+          width: 120px;
+          margin: 0px auto 30px auto;
+          border-radius: 50%;
+          overflow: hidden;
+          img {
+            display: block;
+            width: 120px;
+            height: 120px;
+            margin: 0 auto;
+          }
+        }
         color: #fff;
         span {
           display: block;
@@ -240,11 +272,14 @@ export default {
           margin: 12px auto;
           text-align: center;
           &:last-child {
-            color: #c04d00;
+            color: #fff;
           }
         }
       }
     }
+  }
+  .pad {
+    padding-top: 120px;
   }
 }
 </style>

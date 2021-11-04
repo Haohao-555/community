@@ -6,35 +6,51 @@
 -->
 <template>
   <div class="index">
+    <van-sticky :offset-top="0">
+        <van-search
+          v-model="value"
+          shape="round"
+          background="#c04d00"
+          placeholder="请输入搜索关键词"
+          @change="search"
+        />
+    </van-sticky>
+  
     <div class="nav">
-      <div
-        :class="['item', type==0? 'active': '']"
-        @click="type=0"
-      >广场</div>
-    <div
-      :class="['item', type==1? 'active': '']"
-      @click="type=1"
-    >关注</div>
-  </div>
-  <div class="container">
-    <card
-      v-for="(item, index) in list"
-      :key="index"
-      :content="item.content"
-      :created="item.createdAtFormat"
-      :id="item.id"
-      :nickName="item.user.nickName"
-      :picture="item.user.picture"
-      :userName="item.user.userName"
-      :imgList="imgList"
-      :flag=isEmpty
-    />
-  </div>
+      <div :class="['item', type==0? 'active': '']" @click="type=0">广场</div>
+      <div :class="['item', type==1? 'active': '']" @click="type=1">关注</div>
+    </div>
+    <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
+       <div class="container">
+             <transition-group
+                :duration="{enter: 1200, leave: 150 }"
+                enter-active-class="animate__animated animate__bounceInLeft"
+                enter-to-class="animate__animated animate__bounceInLeft"
+                leave-active-class="animate__animated animate__bounceOutRight"
+                leave-to-class="animate__animated animate__bounceOutRight"
+                >
+                <div v-for="(item, index) in list" :key="index">
+                    <card
+                      :content="item.content"
+                      :created="item.createdAtFormat"
+                      :id="item.id"
+                      :nickName="item.user.nickName"
+                      :picture="item.user.picture"
+                      :userName="item.user.userName"
+                      :imgList="imgList"
+                    />
+                </div>
+             </transition-group>
+      </div>
+    </van-pull-refresh>
+   
 
   </div>
 </template>
 <script>
 import { req_picture, req_blog, req_AttenBlog } from "../network/blog/index.js";
+
+
 import card from "../components/card.vue";
 export default {
   name: "Index",
@@ -49,7 +65,9 @@ export default {
       page: 0,
       type: 0,
       attenPage: 0,
-      isEmpty: true,
+      isLoading: false,
+      value: "",
+      end: false,
     };
   },
   components: {
@@ -72,6 +90,13 @@ export default {
     this.init();
   },
   methods: {
+    reset() {
+      this.blogList = [];
+      this.attenList = [];
+      this.page = 0;
+      this.attenPage = 0;
+      this.end = false;
+    },
     init() {
       document.documentElement.scrollTop = 0;
       this.domObj = window;
@@ -99,22 +124,34 @@ export default {
       };
     },
     getBlog() {
-      req_blog(this, {
-        page: this.page,
-      }).then(res => {
-        this.list = [];
-        let data = res.data.blogList;
-        this.blogList = this.blogList.concat(res.data.blogList);
-        this.list = this.blogList;
-        this.page++;
-        if (data.length == 0) {
-          this.$message({
-            showClose: true,
-            message: "已经到底了",
-            type: "warning",
+      if(!this.end) {
+         this.$toast({
+           message: "正在拼命加载中",
+           icon: 'https://i.loli.net/2021/11/04/E7vqYcZxmIfW5sA.png',
+         })
+          req_blog(this, {
+            page: this.page,
+          }).then(res => {
+            this.isLoading = false;
+            this.list = [];
+            let data = res.data.blogList;
+            this.blogList = this.blogList.concat(data);
+            this.list = this.blogList;
+            this.page++;
+            if (data.length == 0) {
+              this.$toast({
+                message: "到底啦！！",
+              })
+              this.end = true;
+            }
           });
-        }
-      });
+      }else {
+        this.end = true;
+        this.$toast({
+          message: "到底啦！！",
+        })
+      }
+     
     },
     getImg() {
       req_picture(this, {
@@ -124,23 +161,50 @@ export default {
       });
     },
     getAttenBlog() {
-      req_AttenBlog(this, {
-        page: this.attenPage,
-      }).then(res => {
-        this.list = [];
-        let data = res.data.blogList;
-        this.attenList = this.attenList.concat(res.data.blogList);
-        this.list = this.attenList;
-        this.attenPage++;
-        if (data.length == 0) {
-          this.$message({
-            showClose: true,
-            message: "已经到底了",
-            type: "warning",
-          });
-        }
+      if(!this.end) {
+        this.$toast({
+           message: "正在拼命加载中",
+           icon: 'https://i.loli.net/2021/11/04/E7vqYcZxmIfW5sA.png',
+         })
+        req_AttenBlog(this, {
+          page: this.attenPage,
+        }).then(res => {
+          this.isLoading = false;
+          this.list = [];
+          let data = res.data.blogList;
+          this.attenList = this.attenList.concat(res.data.blogList);
+          this.list = this.attenList;
+          this.attenPage++;
+          if (data.length == 0) {
+            this.$toast({
+              message: "到底啦！！",
+            })
+            this.end = true;
+          }
       });
+      }else {
+        this.end = true;
+        this.$toast({
+          message: "到底啦！！",
+        })
+      }
     },
+    search() {
+     this.$toast({
+       message: "未开发",
+       icon: "https://i.loli.net/2021/11/04/FHtGTaU1opeuAch.png"
+     })
+      
+    },
+    onRefresh() {
+      this.reset();
+      if(this.type == 0) {
+        
+        this.getBlog()
+      }else {
+        this.getAttenBlog();
+      }
+    }
   },
   beforeDestroy() {
     this.domObj.onscroll = null;
@@ -149,11 +213,10 @@ export default {
 </script>
 <style lang="scss" scoped>
 .index {
-  padding-top: 20px;
   .nav {
     display: flex;
     width: 90vw;
-    margin: 0 auto;
+    margin: 10px auto;
     .item {
       width: 50%;
       height: 20px;

@@ -32,14 +32,39 @@ const picture = "/mock/img"
 const blog = "/square/loadMore"
 
 /**
+ * 判断用户是否登录，并获取个人信息
+ */
+const isLogin = "/user/isLogin"
+/**
  * 
  */
 const attenBlog = "/blog/loadMore"
+
+/**
+ * 参数
+ * userId
+ */
+const fan = "/user_relation/getfans";
+
+/**
+ * 参数
+ * userId
+ */
+const follow = "/user_relation/getfollows"; 
+
+/**
+ * 参数
+ */
+const provideBlog = "/profile/loadMore/";
 export {
     loginURL,
     register,
     existAccount,
     picture,
     blog,
-    attenBlog
+    attenBlog,
+    isLogin,
+    fan,
+    follow,
+    provideBlog,
 }

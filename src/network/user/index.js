@@ -1,5 +1,5 @@
-import { require_post } from "../require"
-import { loginURL, existAccount, register } from "../url";
+import { require_get, require_post } from "../require"
+import { loginURL, existAccount, register, isLogin } from "../url";
 
 /**
  *  登录
@@ -21,8 +21,15 @@ function req_register(context, params = {}) {
 function req_existAccount(context, params = {}) {
     return require_post(existAccount, params, context);
 }
+/**
+ * 判断是否登录
+ */
+function req_userInfo(context, params = {}) {
+    return require_get(isLogin, params, context);
+}
 export {
     req_login,
     req_register,
-    req_existAccount
+    req_existAccount,
+    req_userInfo
 }

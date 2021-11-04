@@ -6,7 +6,7 @@ Mock.mock(RegExp('/api/mock/img' + ".*"), 'get', (option) => {
     for (let i = 0; i < value; i++) {
         let color = Random.color()
         let img = {
-            url: Random.image('100x100', color, '#FFF', 'png', '模拟数据')
+            url: Random.image('100x100', color, '#FFF', 'png', '1024')
         }
         list.push(img);
     }

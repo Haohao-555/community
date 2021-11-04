@@ -5,89 +5,71 @@
  * @FilePath: \community\src\components\navFooter.vue
 -->
 <template>
-  <ul class="nav-footer">
-      <li >
-        <span :class="['iconfont', 'icon-sdance',index==0? 'active': '']" @click="go(0)"></span>
-      </li>
-      <li >
-        <span :class="['iconfont', 'icon-redianguanzhu', index==1? 'active': '']" @click="go(1)"></span>
-      </li>
-      <li>
-         <span></span>
-      </li>
-      <li >
-        <span :class="['iconfont', 'icon-xiuxianlingshi', index==2? 'active': '']" @click="go(2)"></span>
-      </li>
-      <li>
-         <span :class="['iconfont', 'icon-jingwuicon_svg-', index==3? 'active': '']" @click="go(3)"></span>
-      </li>
-  </ul>
+  <div class="nav-footer">
+    <van-tabbar v-model="active" active-color="#c04d00"  route>
+      
+      <van-tabbar-item replace to="/index">
+        <van-icon class="iconfont" class-prefix="icon" slot="icon" slot-scope="props"
+        :name="props.active ? icon.active_queue:icon.queue"></van-icon>
+        <span>广场</span>
+      </van-tabbar-item>
+      
+       <van-tabbar-item replace to="/leisure">
+        <van-icon class="iconfont" class-prefix="icon" slot="icon" slot-scope="props"
+        :name="props.active ? icon.active_leisure:icon.leisure"></van-icon>
+        <span>悠闲</span>
+      </van-tabbar-item>
+
+       <van-tabbar-item>
+        <van-icon class="iconfont" class-prefix="icon" slot="icon" slot-scope="props"
+        :name="props.active ? icon.active_release:icon.release"></van-icon>
+        <span>发布</span>
+      </van-tabbar-item>
+
+       <van-tabbar-item badge="3" replace to="/attention">
+        <van-icon class="iconfont" class-prefix="icon" slot="icon" slot-scope="props"
+        :name="props.active ? icon.active_attention:icon.attention"></van-icon>
+        <span>信息</span>
+      </van-tabbar-item>
+
+       <van-tabbar-item replace to="/private">
+        <van-icon class="iconfont" class-prefix="icon" slot="icon" slot-scope="props"
+        :name="props.active ? icon.active_private:icon.private"></van-icon>
+        <span>我的</span>
+      </van-tabbar-item>
+    </van-tabbar>
+  </div>
 </template>
 <script>
 export default {
-  name: "NavFooter",
+  name: "navFooter",
   data() {
     return {
-      index: 0,
+      active: 0,
+      icon: {
+        active_queue: "https://i.loli.net/2021/11/04/IabwTEyKQiqNdOv.png",
+        queue: "https://i.loli.net/2021/11/04/Wx4rNkznZ1oLtcI.png",
+
+        active_leisure: "https://i.loli.net/2021/11/04/hBfv84RUEMiswac.png",
+        leisure: "https://i.loli.net/2021/11/04/mf5Taoy913nBvri.png",
+
+        active_release: "https://i.loli.net/2021/11/04/FZuM6XnkKWrdSm2.png",
+        release: "https://i.loli.net/2021/11/04/PeDOVSvuyzBFlb4.png",
+       
+        active_attention: " https://i.loli.net/2021/11/04/gkNJxveQFq5DHly.png",
+        attention: "https://i.loli.net/2021/11/04/UpY2cmGROvtxzo8.png",
+
+        active_private: "https://i.loli.net/2021/11/04/YM1oz4Jaw6BqtNp.png",
+        private: "https://i.loli.net/2021/11/04/7AMDUbLFxaEBQVC.png"
+      },
     };
   },
   methods: {
-    go(index) {
-      this.index = index;
-      let path;
-      if (index == 0) {
-        path = "/index";
-      } else if (index == 1) {
-        path = "/attention";
-      } else if (index == 2) {
-        path = "/leisure";
-      } else if (index == 3) {
-        path = "/private";
-      }
-      this.$router.push({
-        path,
-      })
-    },
-  },
+   
+  }
 };
 </script>
 <style lang="scss" scoped>
-@import "../assets/scss/community.scss";
-@import "../assets/scss/icon.scss";
-.nav-footer {
-  @include flex();
-  background-color: #c04d00;
-  height: 48px;
-  position: fixed;
-  width: 100%;
-  bottom: 0;
-  li {
-    color: #fff;
-    flex-basis: 20%;
-    flex-grow: 1;
-    flex-shrink: 0;
-    text-align: center;
-    height: 48px;
-    text-align: center;
-    padding-top: 12px;
-    box-sizing: border-box;
-    span {
-       display: block;
-       width: 20%;
-       font-size: 20px;
-       height: 48px;
-       padding-left: 20px;
-    }
-    &:nth-child(3) {
-       background-color: red;
-       height: 120px;
-       border-top-left-radius: 40px;
-       border-top-right-radius: 40px;
-    }
-  }
-  // .active {
-  //   color: #c04d00;
-  // }
- 
-}
+ @import "../assets/scss/icon.scss";  
+
 </style>
