@@ -16,7 +16,12 @@ import { Toast,
          Cell, 
          CellGroup,
          Grid,
-         GridItem
+         GridItem,
+         NavBar,
+         Field, 
+         Uploader,
+         Area,
+         Dialog 
 } from 'vant';
 import { Image as VanImage } from 'vant';
 import 'vant/lib/index.css'
@@ -25,19 +30,25 @@ import 'animate.css'
 
 Vue.config.productionTip = false
 
-Vue.use(Toast);
-Vue.use(Notify);
-Vue.use(PullRefresh);
-Vue.use(Search);
-Vue.use(Sticky);
-Vue.use(Tabbar);
-Vue.use(TabbarItem);
-Vue.use(Icon);
-Vue.use(Cell);
-Vue.use(CellGroup);
-Vue.use(VanImage);
+Vue.use(Toast)
+Vue.use(Notify)
+Vue.use(PullRefresh)
+Vue.use(Search)
+Vue.use(Sticky)
+Vue.use(Tabbar)
+Vue.use(TabbarItem)
+Vue.use(Icon)
+Vue.use(Cell)
+Vue.use(CellGroup)
+Vue.use(VanImage)
 Vue.use(Grid)
 Vue.use(GridItem)
+Vue.use(NavBar)
+Vue.use(Field)
+Vue.use(Uploader)
+Vue.use(Area)
+Vue.use(Field)
+Vue.use(Dialog)
 // mock开关
 const mock = true;
 if (mock) {

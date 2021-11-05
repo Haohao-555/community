@@ -22,25 +22,17 @@
     </div>
     <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
        <div class="container">
-             <transition-group
-                :duration="{enter: 1200, leave: 150 }"
-                enter-active-class="animate__animated animate__bounceInLeft"
-                enter-to-class="animate__animated animate__bounceInLeft"
-                leave-active-class="animate__animated animate__bounceOutRight"
-                leave-to-class="animate__animated animate__bounceOutRight"
-                >
-                <div v-for="(item, index) in list" :key="index">
-                    <card
-                      :content="item.content"
-                      :created="item.createdAtFormat"
-                      :id="item.id"
-                      :nickName="item.user.nickName"
-                      :picture="item.user.picture"
-                      :userName="item.user.userName"
-                      :imgList="imgList"
-                    />
-                </div>
-             </transition-group>
+          <div  v-for="(item, index) in list" :key="index">
+            <card
+            :content="item.content"
+            :created="item.createdAtFormat"
+            :id="item.id"
+            :nickName="item.user.nickName"
+            :picture="item.user.picture"
+            :userName="item.user.userName"
+            :imgList="imgList"
+          />
+          </div>
       </div>
     </van-pull-refresh>
    
@@ -49,7 +41,7 @@
 </template>
 <script>
 import { req_picture, req_blog, req_AttenBlog } from "../network/blog/index.js";
-
+import {  req_fan, req_follow } from "../network/relation/index.js";
 
 import card from "../components/card.vue";
 export default {
@@ -68,6 +60,8 @@ export default {
       isLoading: false,
       value: "",
       end: false,
+
+      userInfo: this.$store.state.userInfo,
     };
   },
   components: {
@@ -85,6 +79,8 @@ export default {
   created() {
     this.getBlog();
     this.getImg();
+    this.getFanList();
+    this.getFollowList();
   },
   mounted() {
     this.init();
@@ -199,12 +195,21 @@ export default {
     onRefresh() {
       this.reset();
       if(this.type == 0) {
-        
         this.getBlog()
       }else {
         this.getAttenBlog();
       }
-    }
+    },
+    getFanList() {
+       req_fan(this, {userId: this.userInfo.id}).then(res => {
+         this.$store.dispatch("saveFanList", res.data);
+       })
+    },
+    getFollowList() {
+       req_follow(this, {userId: this.userInfo.id}).then(res => {
+         this.$store.dispatch("saveFollowerList", res.data);
+       })
+    },
   },
   beforeDestroy() {
     this.domObj.onscroll = null;

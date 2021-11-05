@@ -40,6 +40,18 @@ let router = new Router({
             path: '/login',
             name: 'Login',
             component: () => import('./pages/Login.vue')
+        },{
+            path: '/updateInformation',
+            name: 'Formation',
+            component: () => import('./pages/formation.vue')
+        },{
+            path: '/updatepaw',
+            name: 'Updatepaw',
+            component: () => import('./pages/updatepaw.vue')
+        },{
+            path: '/personal',
+            name: 'Personal',
+            component: () => import('./pages/personal.vue')
         }
     ]
 })

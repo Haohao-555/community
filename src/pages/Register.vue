@@ -152,7 +152,11 @@ export default {
               background: '#fff',
             })
           } else {
-            this.$message.success("注册成功");
+            this.$notify({
+              message: "正在跳转到登录页",
+              color: "#ad0000",
+              background: "#fff",
+            })
             this.$router.push("/login");
           }
         });

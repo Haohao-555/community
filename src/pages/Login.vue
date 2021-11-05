@@ -42,12 +42,18 @@ export default {
         userName: "",
       },
       loginState: false,
-      avaUrl: ""
+      avaUrl: "",
+
+
     };
+  },
+  watch:{
+    
   },
   created() {
     this.isLogin();
   },
+ 
   methods: {
     // 判断是否登录
     isLogin() {

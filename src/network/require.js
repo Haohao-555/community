@@ -23,7 +23,11 @@
  function require_post(url, params, context) {
     return context.axios.post(url, params);
 }
+function require_patch(url, params, context) {
+    return context.axios.patch(url, params);
+}
 export {
    require_get,
-   require_post
+   require_post,
+   require_patch
 }
