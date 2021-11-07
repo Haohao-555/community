@@ -21,7 +21,8 @@ import { Toast,
          Field, 
          Uploader,
          Area,
-         Dialog 
+         Dialog,
+         ShareSheet, 
 } from 'vant';
 import { Image as VanImage } from 'vant';
 import 'vant/lib/index.css'
@@ -49,6 +50,7 @@ Vue.use(Uploader)
 Vue.use(Area)
 Vue.use(Field)
 Vue.use(Dialog)
+Vue.use(ShareSheet)
 // mock开关
 const mock = true;
 if (mock) {

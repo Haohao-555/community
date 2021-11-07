@@ -31,12 +31,19 @@
             :picture="item.user.picture"
             :userName="item.user.userName"
             :imgList="imgList"
+            @shape="shape"
+            :shapeflag=true
           />
           </div>
       </div>
     </van-pull-refresh>
    
-
+    <van-share-sheet
+      v-model="showShare"
+      title="立即分享给好友"
+      :options="options"
+      @select="onselect"
+     />
   </div>
 </template>
 <script>
@@ -62,6 +69,22 @@ export default {
       end: false,
 
       userInfo: this.$store.state.userInfo,
+
+      showShare: false,
+      options: [
+        [
+          { name: '微信', icon: 'wechat' },
+          { name: '朋友圈', icon: 'wechat-moments' },
+          { name: '微博', icon: 'weibo' },
+          { name: 'QQ', icon: 'qq' },
+        ],
+        [
+          { name: '复制链接', icon: 'link' },
+          { name: '分享海报', icon: 'poster' },
+          { name: '二维码', icon: 'qrcode' },
+          { name: '小程序码', icon: 'weapp-qrcode' },
+        ],
+      ],
     };
   },
   components: {
@@ -210,6 +233,18 @@ export default {
          this.$store.dispatch("saveFollowerList", res.data);
        })
     },
+    shape(id) {
+      console.log("博客ID 为",id);
+      this.showShare = true;
+    },
+    onselect(option) {
+       console.log("选择分享的渠道为",option.name);
+       this.$toast({
+          message: "未开发",
+          icon: "https://i.loli.net/2021/11/04/FHtGTaU1opeuAch.png"
+       })
+       this.showShare = false;
+    }
   },
   beforeDestroy() {
     this.domObj.onscroll = null;

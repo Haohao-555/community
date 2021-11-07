@@ -1,11 +1,10 @@
 <template>
     <div class="formation">
-        <van-nav-bar
-            title="个人信息"
-            left-text="返回"
-            left-arrow
-            @click-left="onClickLeft"
-        />
+        <nav-header>
+          <template v-slot:title>
+             <span>修改个人信息</span>
+          </template>
+        </nav-header>
         <img :src="picture" alt="">
         <div class="message">
             <h3>基本信息</h3>
@@ -42,8 +41,12 @@
 <script>
 import { req_changeUesrInfo, req_userInfo } from "../network/user/index.js";
 import { areaList } from '@vant/area-data';
+import navHeader from "../components/navHeader";
    export default {
        name: "Formation",
+       components: {
+           navHeader,
+       },
        data() {
            return {
                nickName: this.$store.state.userInfo.nickName,
@@ -132,16 +135,5 @@ import { areaList } from '@vant/area-data';
             border-radius: 12px;
             font-size: 14px;
         }
-    }
-    .van-nav-bar {
-      .van-icon {
-          color: #c04d00;
-      }
-      .van-nav-bar__text {
-          color: #c04d00
-      }
-      .van-nav-bar__title {
-          color: #c04d00;
-      }
     }
 </style>

@@ -1,7 +1,12 @@
+<!--
+ * @Date: 2021-11-01 16:02:06
+ * @Author: 浩
+ * @LastEditors: 浩
+ * @FilePath: \community\src\App.vue
+-->
 <template>
   <div id="app">
      <router-view></router-view>
-     
   </div>
 </template>
 
@@ -47,4 +52,9 @@ export default {
 </script>
 <style lang="scss">
 @import "./assets/scss/reset.scss";
+
+::-webkit-scrollbar {
+    display: none;
+}
+
 </style>

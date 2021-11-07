@@ -6,7 +6,7 @@
         <img :src="user.picture" alt="">
           <span class="nickname">{{user.nickName}}</span>
           <span class="city">城市：{{user.city}}</span>
-          <div class="personal" @click="personal">个人主页 &gt; </div>
+          <div class="personal" @click="personal">个人主页</div>
           <div class="list">
             <div class="item" @click="follower">关注（{{followerList.count}}）</div>
             <div class="item" @click="faner">粉丝（{{fanList.count}}）</div>
@@ -152,11 +152,15 @@ export default {
       }
       .personal {
         position: absolute;
-        right: 0;
+        right: 5px;
         top: 30px;
         font-size: 12px;
         line-height: 20px;
         padding: 6px 12px;
+        background-color: #c04d00;
+        color: #fff;
+        border-radius: 6px;
+        height: 20px;
       }
     }
   }

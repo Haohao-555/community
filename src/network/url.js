@@ -7,12 +7,14 @@ const blog = "/square/loadMore"
 const isLogin = "/user/isLogin"
 const attenBlog = "/blog/loadMore"
 const fan = "/user_relation/getfans"
-const follow = "/user_relation/getfollows"
+const follower = "/user_relation/getfollows"
 const provideBlog = "/profile/loadMore/"
 const changeUserInfo = "/user/changeInfo"
 const changePaw = "/user/changePassword"
 const logout = "/user/logout" 
 const userInfo = "/user/getOtherInfo"
+const follow = "/profile/follow"
+const unfollow = "/profile/unfollow"
 export {
     loginURL,
     register,
@@ -22,10 +24,12 @@ export {
     attenBlog,
     isLogin,
     fan,
-    follow,
+    follower,
     provideBlog,
     changeUserInfo,
     changePaw,
     logout,
     userInfo,
+    unfollow,
+    follow
 }

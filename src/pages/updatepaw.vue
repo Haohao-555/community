@@ -1,11 +1,10 @@
 <template>
     <div class="updatepaw">
-        <van-nav-bar
-            title="修改密码"
-            left-text="返回"
-            left-arrow
-            @click-left="onClickLeft"
-        />
+        <nav-header>
+          <template v-slot:title>
+             <span>修改密码</span>
+          </template>
+        </nav-header>
         <div class="info">
             <img :src="user.picture" alt="">
         </div>
@@ -30,8 +29,12 @@
 </template>
 <script>
 import { req_changePaw } from "../network/user/index.js";
+import navHeader from "../components/navHeader";
 export default {
   name: "Updatepaw",
+  components: {
+    navHeader,
+  },
   data() {
     return {
       newPaw: "",
@@ -40,9 +43,6 @@ export default {
     };
   },
   methods: {
-    onClickLeft() {
-      this.$router.back(-1);
-    },
     updatePaw() {
       if (this.oldPaw.trim() && this.newPaw.trim()) {
         req_changePaw(this, {
@@ -100,17 +100,6 @@ export default {
     margin: 12px auto;
     border-radius: 12px;
     font-size: 14px;
-  }
-}
-.van-nav-bar {
-  .van-icon {
-    color: #c04d00;
-  }
-  .van-nav-bar__text {
-    color: #c04d00;
-  }
-  .van-nav-bar__title {
-    color: #c04d00;
   }
 }
 </style>

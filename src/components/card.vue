@@ -7,7 +7,7 @@
 <template>
   <div class="card">
         <div class="card-container">
-         <div class="info">
+         <div class="info" @click="personal(userName)">
             <img :src="picture" alt="">
             <span class="nickname">{{nickName}}</span>
          </div>
@@ -22,6 +22,11 @@
              </van-grid-item>
            </van-grid>
           </div>
+          <div class="communit" v-if="shapeflag">
+              <span class="iconfont icon-fenxiang shape" @click="shape(id)">分享</span>
+              <span class="iconfont icon-pinglun discus">1</span>
+              <span class="iconfont icon-dianzan call">12</span>
+          </div>
        </div>
   </div>
 </template>
@@ -29,7 +34,6 @@
   export default {
       name: "card",
       props: {
-        data: Array,
         id: Number,
         content: String,
         created: String,
@@ -37,17 +41,40 @@
         picture: String,
         userName: String,
         imgList: Array,
+        shapeflag: Boolean,
+      },
+      methods: {
+        shape(id) {
+          this.$emit("shape", id);
+        },
+        personal(userName) {
+          console.log(this.$route.fullPath);
+          if(this.$route.fullPath == `/personal?name=${userName}`) {
+             this.$notify({
+                message: '当前正处在该页面',
+                color: '#ad0000',
+                background: '#fff',
+              })
+          }else {
+             this.$router.push({
+                path: `/personal`,
+                query: {
+                  name: userName
+                }
+             })
+          }
+          
+        }
       }
   }
 </script>
 <style lang="scss" scoped>
+@import "../assets/scss/icon.scss";
     .card {
       .card-container {
         position: relative;
         width: 90vw;
         margin: 0 auto;
-        border-radius: 12px;
-        box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
         padding: 6px;
         margin-bottom: 12px; 
          .info{
@@ -63,6 +90,9 @@
              height: 40px;
              line-height: 30px;
              margin-left: 6px;
+             &:hover {
+               color: #c04d00;
+             }
            }
          }
          .time{
@@ -82,11 +112,30 @@
          .img-container{
            margin: 12px auto;
            width: 318px;
-           img {
-             margin-bottom: 6px;
+           .van-grid {
+             .van-grid-item {
+               .van-grid-item__content {
+                  img {
+                    width: 100px;
+                    height: 100px;
+                  }
+               }
+             }
            }
          }
-        
+         .communit {
+           height: 30px;
+           display: flex;
+           font-size: 12px;
+           color: #333;
+           line-height: 30px;
+           padding: 0px 12px;
+           span {
+              flex: 1;
+              margin-left: 12px;
+              padding-left: 12px;
+           }
+         }
       }
     }
 </style>
