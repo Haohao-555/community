@@ -121,6 +121,8 @@ export default {
     height: 100%;
     z-index: -1;
     background-color: #c04d00;
+    background: url("/img/bg3.png") no-repeat;
+    background-position: center;
   }
   .container {
     padding-top: 100px;

@@ -9,7 +9,6 @@
     <div class="bg"></div>
     <div :class="['container', loginState? '' : 'pad']">
       <div class="form-container" v-if="!loginState">
-          <div class="title">注册</div>
           <div class="row">
             <input type="text" placeholder="请输入账号" v-model="userName">
           </div>
@@ -188,17 +187,13 @@ export default {
     height: 100%;
     z-index: -1;
     background-color: #c04d00;
+    background: url("/img/bg3.png") no-repeat;
+    background-position: center;
   }
   .container {
     box-sizing: border-box;
     .form-container {
-      .title {
-        text-align: center;
-        color: #fff;
-        line-height: 30px;
-        margin-bottom: 20px;
-      }
-      background-color: rgba($color: #000000, $alpha: 0.4);
+      background-color: rgba($color: #ffffff, $alpha: 0.4);
       width: 300px;
       margin: 0 auto;
       padding: 30px 12px;
@@ -238,7 +233,7 @@ export default {
         background: none;
         margin: 0 auto;
         display: block;
-        background-color: #c04d00;
+        // background-color: #c04d00;
         color: #fff;
       }
     }
