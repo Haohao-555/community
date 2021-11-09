@@ -14,7 +14,6 @@
       name: "navHeader",
       methods: {
          back() {
-           console.log("触发")
            this.$router.back(-1);
          }
       },
@@ -46,6 +45,22 @@
          line-height: 40px;
          color: #c04d00;
          font-size: 14px;
+         width: 120px;
+         display: flex;
+         justify-content: center;
+         span {
+           margin-right: 14px;
+           border-bottom: 4px solid transparent;
+           white-space: nowrap; 
+           overflow: hidden; 
+           text-overflow: ellipsis; 
+           &:last-child {
+             margin-right: 0px;
+           }
+         }
+         .active {
+            border-bottom-color: #c04d00;
+         }
        }
        .right {
          float: right;

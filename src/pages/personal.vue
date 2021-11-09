@@ -26,11 +26,11 @@
                 <span class="name">{{userInfo.nickName}}</span>
             </div>
             <div class="social">
-               <div class="fan">
+               <div class="fan" @click="social(1)">
                    <div class="count">{{fan.count}}</div>
                    关注TA的
                </div>
-               <div class="follow">
+               <div class="follow" @click="social(2)">
                    <div class="count">{{follwer.count}}</div>
                    TA关注的
                </div>
@@ -137,6 +137,17 @@ export default {
         }
       };
     }, 
+    social(type) {
+      window.sessionStorage.setItem("fanList", JSON.stringify(this.fan));
+      window.sessionStorage.setItem("followerList", JSON.stringify(this.follwer));
+      window.sessionStorage.setItem("user", JSON.stringify(this.userInfo));
+      this.$router.push({
+        path: "/social",
+        query: {
+           type,
+        }
+      })
+    },
     // 获取当前页面主人信息
     getUserInfo() {
       req_info(this, {

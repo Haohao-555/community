@@ -48,7 +48,6 @@
           this.$emit("shape", id);
         },
         personal(userName) {
-          console.log(this.$route.fullPath);
           if(this.$route.fullPath == `/personal?name=${userName}`) {
              this.$notify({
                 message: '当前正处在该页面',

@@ -1,15 +1,14 @@
 <template>
   <div class="private">
     <div class="container">
-
       <div class="info">
         <img :src="user.picture" alt="">
           <span class="nickname">{{user.nickName}}</span>
           <span class="city">城市：{{user.city}}</span>
           <div class="personal" @click="personal">个人主页</div>
           <div class="list">
-            <div class="item" @click="follower">关注（{{followerList.count}}）</div>
-            <div class="item" @click="faner">粉丝（{{fanList.count}}）</div>
+            <div class="item" @click="social(2)">关注（{{followerList.count}}）</div>
+            <div class="item" @click="social(1)">粉丝（{{fanList.count}}）</div>
             <div class="item" @click="personal">说说（{{blogCount}}）</div>
             <div class="item">足迹</div>
           </div>
@@ -57,7 +56,6 @@ export default {
       fanList: this.$store.state.fansList,
       followerList: this.$store.state.followerList,
       blogCount: 0,
-    
     };
   },
   mounted() {
@@ -72,11 +70,16 @@ export default {
         this.blogCount = res.data.count;
       })
     },
-    follower() {
-
-    },
-    faner() {
-
+    social(type) {
+      window.sessionStorage.setItem("fanList", JSON.stringify(this.fanList));
+      window.sessionStorage.setItem("followerList", JSON.stringify(this.followerList));
+      window.sessionStorage.setItem("user", JSON.stringify(this.user));
+      this.$router.push({
+        path: "/social",
+        query: {
+           type,
+        }
+      })
     },
     personal() {
       this.$router.push({

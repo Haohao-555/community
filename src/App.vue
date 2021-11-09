@@ -11,7 +11,7 @@
 </template>
 
 <script>
-
+import { req_userInfo } from "./network/user/index.js"
 export default {
   name: 'App',
   data() {
@@ -43,7 +43,12 @@ export default {
 
         sessionStorage.removeItem("store");
         this.userInfo = JSON.parse(store).userInfo;
+      }else {
+         req_userInfo(this).then(res => {
+           this.$store.dispatch("saveUserInfo", res.data);
+         }) 
       }
+
     },
    
 
@@ -52,9 +57,5 @@ export default {
 </script>
 <style lang="scss">
 @import "./assets/scss/reset.scss";
-
-::-webkit-scrollbar {
-    display: none;
-}
 
 </style>

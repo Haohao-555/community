@@ -1,17 +1,13 @@
 <template>
-  <div class="login">
-    <div class="bg"></div>  
+  <div class="login">  
         <div class="container" v-if="!loginState">
-            <div class="ava">
-              <img src="/img/login.png" alt="">
-            </div>
             <div class="account row">
                 <input type="text" name="" id="" v-model="account" placeholder="请输入账号">
             </div>
             <div class="password row">
                 <input type="text" v-model="password" placeholder="请输入密码">
             </div>
-            <button @click="login" class="login">登录</button>
+            <button @click="login" class="btn">登录</button>
             <span class="register" @click="register">没有账号？ 立即注册</span>
         </div>
         <div class="container" v-if="loginState">
@@ -19,8 +15,9 @@
               <img :src="user.picture" alt="">
             </div>
             <div class="info">
-                <span>{{user.nickName}}您已登录</span>
-                <span @click="back">主页</span>
+                <span class="content">{{user.nickName}}</span>
+                <span class="content">您已登录</span>
+                <span class="back" @click="back">主页</span>
             </div>
         </div>
   </div>
@@ -112,20 +109,16 @@ export default {
 <style lang="scss">
 @import "../assets/scss/community.scss";
 .login {
-  position: relative;
   height: 100vh;
-  z-index: 3;
-  .bg {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    background-color: #c04d00;
-    background: url("/img/bg3.png") no-repeat;
-    background-position: center;
-  }
+  background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+  padding-top: 140px;
   .container {
-    padding-top: 100px;
+    width: 90vw;
+    margin: 0px auto;
+    padding-top: 40px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 2px 2px 3px rgba($color: #000000, $alpha: .4);
     .ava {
       height: 120px;
       width: 120px;
@@ -145,7 +138,7 @@ export default {
       margin: 0 auto;
       border-radius: 16px;
       overflow: hidden;
-      border: 1px solid #fff;
+      border: 1px solid #333;
       margin-bottom: 30px;
       input {
         background: none;
@@ -154,27 +147,36 @@ export default {
         height: 40px;
         padding-left: 20px;
         font-size: 14px;
-        color: #fff;
+        color: #000;
       }
     }
-    .login {
+    .btn {
       width: 200px;
       height: 40px;
       border-radius: 12px;
-      padding: 12px 20px;
       border: none;
       background: none;
       margin: 0 auto;
       display: block;
+      background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
       color: #fff;
+      padding: 6px;
     }
     .info {
-      color: #fff;
+      color: #333;
       span {
         display: block;
-        width: 200px;
         margin: 12px auto;
         text-align: center;
+        margin-bottom: 6px;
+        font-size: 12px;
+        &:first-child {
+           color: #c04d00;
+        }
+      }
+      .back {
+         font-size: 18px;
+         padding-bottom: 20px;
       }
     }
     .register {

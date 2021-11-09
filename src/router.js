@@ -52,6 +52,10 @@ let router = new Router({
             path: '/personal',
             name: 'Personal',
             component: () => import('./pages/personal.vue')
+        }, {
+            path: '/social',
+            name: 'Social',
+            component: () => import('./pages/social.vue')
         }
     ]
 })

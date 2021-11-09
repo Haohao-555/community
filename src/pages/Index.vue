@@ -98,6 +98,12 @@ export default {
         this.getAttenBlog();
       }
     },
+    '$store.state.fansList': function() {
+      console.log("vuex监听到变化 粉丝");
+    },
+    '$store.state.followerList': function() {
+      console.log("vuex监听到变化 关注")
+    }
   },
   created() {
     this.getBlog();

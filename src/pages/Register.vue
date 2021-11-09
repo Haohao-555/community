@@ -6,8 +6,7 @@
 -->
 <template>
   <div class="register">
-    <div class="bg"></div>
-    <div :class="['container', loginState? '' : 'pad']">
+    <div class="container">
       <div class="form-container" v-if="!loginState">
           <div class="row">
             <input type="text" placeholder="请输入账号" v-model="userName">
@@ -178,29 +177,20 @@ export default {
 <style lang="scss" scoped>
 @import "../assets/scss/community.scss";
 .register {
-  position: relative;
   height: 100vh;
-  z-index: 3;
-  .bg {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    background-color: #c04d00;
-    background: url("/img/bg3.png") no-repeat;
-    background-position: center;
-  }
+  background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
   .container {
-    box-sizing: border-box;
     .form-container {
-      background-color: rgba($color: #ffffff, $alpha: 0.4);
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 2px 2px 3px rgba($color: #000000, $alpha: .4);
       width: 300px;
       margin: 0 auto;
       padding: 30px 12px;
       .row {
         width: 280px;
         height: 40px;
-        border: 1px solid #fff;
+        border: 1px solid #333;
         margin: 0px auto 12px auto;
         input {
           background: none;
@@ -209,9 +199,9 @@ export default {
           height: 40px;
           padding-left: 20px;
           font-size: 14px;
-          color: #fff;
+          color: #333;
         }
-        &:nth-child(5) {
+        &:nth-child(4) {
           border: none;
           @include flex();
           .option {
@@ -220,7 +210,7 @@ export default {
             label {
               font-size: 14px;
               margin-left: 12px;
-              color: #fff;
+              color: #333;
             }
           }
         }
@@ -233,7 +223,7 @@ export default {
         background: none;
         margin: 0 auto;
         display: block;
-        // background-color: #c04d00;
+        background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
         color: #fff;
       }
     }
@@ -270,15 +260,14 @@ export default {
           width: 200px;
           margin: 12px auto;
           text-align: center;
+          margin-bottom: 6px;
+          font-size: 14px;
           &:last-child {
-            color: #fff;
+            font-size: 16px;
           }
         }
       }
     }
-  }
-  .pad {
-    padding-top: 120px;
   }
 }
 </style>
