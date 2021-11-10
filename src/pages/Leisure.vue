@@ -1,6 +1,6 @@
 <template>
   <div class="leisure">
-
+    未开发
   </div>
 </template>
 <script>

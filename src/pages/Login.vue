@@ -103,7 +103,6 @@ export default {
 };
 </script>
 <style lang="scss">
-@import "../assets/scss/community.scss";
 .login {
   height: 100vh;
   background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);

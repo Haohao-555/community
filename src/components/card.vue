@@ -13,7 +13,7 @@
          </div>
          <div class="time">{{created}}</div>
          <div class="text">
-            <p>{{content}}</p>
+            <p v-html="formatContent"></p>
          </div>
          <div class="img-container">
            <van-grid :column-num="3" square :border="false">
@@ -31,6 +31,7 @@
   </div>
 </template>
 <script>
+import formatContent from "../tools/_format.js";
   export default {
       name: "card",
       props: {
@@ -42,6 +43,15 @@
         userName: String,
         imgList: Array,
         shapeflag: Boolean,
+      },
+      watch: {
+        content: {
+          handler() {
+             this.formatContent = formatContent(this.content);
+          },
+          immediate: true,
+          deep: true,
+        }
       },
       methods: {
         shape(id) {
@@ -63,7 +73,7 @@
              })
           }
           
-        }
+        },
       }
   }
 </script>
@@ -107,6 +117,11 @@
             line-height: 24px;
             text-align: justify;
             padding: 0px 10px;
+            p {
+               a {
+                color: #c04d00;
+               }
+            }
          }
          .img-container{
            margin: 12px auto;

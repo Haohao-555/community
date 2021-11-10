@@ -5,7 +5,7 @@
  * @FilePath: \community\src\App.vue
 -->
 <template>
-  <div id="app">
+  <div id="app" :key="$route.fullPath">
      <router-view></router-view>
   </div>
 </template>

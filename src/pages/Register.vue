@@ -32,11 +32,9 @@
             </div>
          </div>
         <button @click="register" class="btn">注册</button>
+        <span class="back-login" @click="back">返回</span>
       </div>
       <div class="login" v-if="loginState">
-        <div class="ava">
-          <img :src="avaUrl" alt="">
-        </div>
         <div class="info">
           <div class="ava">
             <img :src="user.picture" alt="">
@@ -175,9 +173,10 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-@import "../assets/scss/community.scss";
 .register {
   height: 100vh;
+  padding-top:120px;
+  box-sizing: border-box;
   background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
   .container {
     .form-container {
@@ -203,14 +202,17 @@ export default {
         }
         &:nth-child(4) {
           border: none;
-          @include flex();
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
           .option {
             width: 140px;
-            @include flex(flex-start);
+            display: flex; 
             label {
               font-size: 14px;
               margin-left: 12px;
               color: #333;
+              line-height: 40px;
             }
           }
         }
@@ -227,7 +229,15 @@ export default {
         color: #fff;
       }
     }
+    .back-login {
+      display: block;
+      margin: 12px auto 0px auto;
+      width: 120px;
+      text-align: center;
+      font-size: 12px;
+    }
     .login {
+      padding-top: -120px;
       .ava {
         height: 120px;
         width: 120px;

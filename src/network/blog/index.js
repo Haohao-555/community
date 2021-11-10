@@ -1,5 +1,5 @@
-import { require_get } from "../require"
-import { picture ,blog, attenBlog, provideBlog, callMyCount, callMyBlog } from "../url";
+import { require_get, require_post } from "../require"
+import { picture ,blog, attenBlog, provideBlog, callMyCount, callMyBlog, createBlog } from "../url";
 
 /**
  * 获取图片
@@ -39,6 +39,14 @@ function req_callMy(context, params = {}) {
 function req_callBlog(context, params = {}) {
     return require_get(callMyBlog +`/${params.page}`, params, context);
 }
+
+/**
+ * 发布博客
+ */
+function req_createBlog(context, params = {}) {
+    return require_post(createBlog, params, context);
+}
+
 export {
     req_picture,
     req_blog,
@@ -46,4 +54,5 @@ export {
     req_provideBlog,
     req_callMy,
     req_callBlog,
+    req_createBlog
 }

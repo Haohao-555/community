@@ -17,6 +17,8 @@ const follow = "/profile/follow"
 const unfollow = "/profile/unfollow"
 const callMyCount = "/atMe/number"
 const callMyBlog = "/atMe/loadMore"
+const createBlog = "/blog/create"
+
 export {
     loginURL,
     register,
@@ -35,5 +37,6 @@ export {
     unfollow,
     follow,
     callMyCount,
-    callMyBlog
+    callMyBlog,
+    createBlog
 }

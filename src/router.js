@@ -30,6 +30,10 @@ let router = new Router({
                 path: "/private",
                 name: "Private",
                 component: () => import("./pages/Private.vue")
+            }, {
+                path: "/release",
+                name: "Release",
+                component: () => import("./pages/Release")
             }
            ]
         },{
@@ -43,19 +47,19 @@ let router = new Router({
         },{
             path: '/updateInformation',
             name: 'Formation',
-            component: () => import('./pages/formation.vue')
+            component: () => import('./pages/Formation.vue')
         },{
             path: '/updatepaw',
             name: 'Updatepaw',
-            component: () => import('./pages/updatepaw.vue')
+            component: () => import('./pages/Updatepaw.vue')
         },{
             path: '/personal',
             name: 'Personal',
-            component: () => import('./pages/personal.vue')
+            component: () => import('./pages/Personal.vue')
         }, {
             path: '/social',
             name: 'Social',
-            component: () => import('./pages/social.vue')
+            component: () => import('./pages/Social.vue')
         }
     ]
 })

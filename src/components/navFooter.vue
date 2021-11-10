@@ -20,8 +20,8 @@
         <span>悠闲</span>
       </van-tabbar-item>
 
-       <van-tabbar-item>
-        <van-icon class="iconfont" class-prefix="icon" slot="icon" slot-scope="props"
+       <van-tabbar-item replace to="/release">
+        <van-icon class="iconfont" class-prefix="icon" slot="icon" slot-scope="props" 
         :name="props.active ? icon.active_release:icon.release"></van-icon>
         <span>发布</span>
       </van-tabbar-item>
@@ -83,6 +83,4 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
- @import "../assets/scss/icon.scss";  
-
 </style>
