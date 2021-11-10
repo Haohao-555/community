@@ -48,8 +48,6 @@
 </template>
 <script>
 import { req_picture, req_blog, req_AttenBlog } from "../network/blog/index.js";
-import {  req_fan, req_follow } from "../network/relation/index.js";
-
 import card from "../components/card.vue";
 export default {
   name: "Index",
@@ -108,8 +106,6 @@ export default {
   created() {
     this.getBlog();
     this.getImg();
-    this.getFanList();
-    this.getFollowList();
   },
   mounted() {
     this.init();
@@ -228,16 +224,6 @@ export default {
       }else {
         this.getAttenBlog();
       }
-    },
-    getFanList() {
-       req_fan(this, {userId: this.userInfo.id}).then(res => {
-         this.$store.dispatch("saveFanList", res.data);
-       })
-    },
-    getFollowList() {
-       req_follow(this, {userId: this.userInfo.id}).then(res => {
-         this.$store.dispatch("saveFollowerList", res.data);
-       })
     },
     shape(id) {
       console.log("博客ID 为",id);

@@ -43,7 +43,6 @@
                     :nickName="item.nickName"
                     :flag="item.flag"
                     :show="true"
-                    @isfollow="isfollow"
                 />
             </div>
             <div class="item" v-if="type==2">
@@ -64,7 +63,6 @@
                     :nickName="item.nickName"
                     :flag="item.flag"
                     :show="true"
-                    @isfollow="isfollow"
                 />
             </div>
         </div>
@@ -73,7 +71,6 @@
 <script>
 import navHeader from "../components/navHeader";
 import person from "../components/person";
-import { req_unfollow, req_guangzu } from "../network/relation/index.js";
 import tools from "../tools/index.js";
 export default {
   name: "social",
@@ -125,40 +122,10 @@ export default {
  
         this.followerList.userList.forEach((item, index, arr) => {
             let flag = tools.isexit(item, this.currentUserFollowerList);
-            console.log(flag)
             arr[index].flag = flag;
         });
-            
-      
       },
       immediate: true,
-    },
-  },
-  methods: {
-    isfollow(state, userId, ava, nickName) {
-      if (state) {
-        req_unfollow(this, {
-          userId,
-        }).then((res) => {
-           if(res.errno == 0) {
-              let i = this.currentUserFollowerList.findIndex(item => item.id == userId)
-              this.currentUserFollowerList.splice(i, 1);
-           } 
-        });
-      } else {
-        req_guangzu(this, {
-          userId,
-        }).then((res) => {
-          if(res.errno == 0) {
-            this.currentUserFollowerList.push({
-                id: userId,
-                nickName,
-                picture: ava
-            })
-          } 
-         
-        });
-      }
     },
   },
 };

@@ -5,7 +5,7 @@
                 <input type="text" name="" id="" v-model="account" placeholder="请输入账号">
             </div>
             <div class="password row">
-                <input type="text" v-model="password" placeholder="请输入密码">
+                <input type="password" v-model="password" placeholder="请输入密码">
             </div>
             <button @click="login" class="btn">登录</button>
             <span class="register" @click="register">没有账号？ 立即注册</span>
@@ -23,7 +23,7 @@
   </div>
 </template>
 <script>
-import { req_login} from "../network/user/index.js";
+import { req_login } from "../network/user/index.js";
 import constant from "../conf/constant";
 export default {
   name: "Login",
@@ -44,13 +44,9 @@ export default {
 
     };
   },
-  watch:{
-    
-  },
   created() {
     this.isLogin();
   },
- 
   methods: {
     // 判断是否登录
     isLogin() {

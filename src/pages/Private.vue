@@ -44,12 +44,12 @@
   </div>
 </template>
 <script>
-import { req_provideBlog   } from "../network/blog/index.js";
-import {req_logout} from "../network/user/index.js";
+import { req_provideBlog } from "../network/blog/index.js";
+import { req_logout } from "../network/user/index.js";
+import {  req_fan, req_follow } from "../network/relation/index.js";
 import constant from "../conf/constant.js";
 export default {
   name: "Private",
-  components: {},
   data() {
     return {
       user: this.$store.state.userInfo,
@@ -60,6 +60,16 @@ export default {
   },
   mounted() {
      this.getBlog();
+     this.getFanList();
+     this.getFollowList();
+  },
+  watch: {
+    '$store.state.fanList': function() {
+        this.fanList = this.$store.state.fanList;
+    },
+    '$store.state.followerList': function() {
+      this.followerList = this.$store.state.followerList;
+    }
   },
   methods: {
     getBlog() {
@@ -99,7 +109,17 @@ export default {
             this.$router.push("/login");
         })
       })
-    }
+    },
+    getFanList() {
+       req_fan(this, {userId: this.user.id}).then(res => {
+         this.$store.dispatch("saveFanList", res.data);
+       })
+    },
+    getFollowList() {
+       req_follow(this, {userId: this.user.id}).then(res => {
+         this.$store.dispatch("saveFollowerList", res.data);
+       })
+    },
   },
 };
 </script>
