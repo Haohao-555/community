@@ -26,7 +26,7 @@
         <span>发布</span>
       </van-tabbar-item>
 
-       <van-tabbar-item badge="3" replace to="/attention">
+       <van-tabbar-item :badge="num" replace to="/attention" @click="go">
         <van-icon class="iconfont" class-prefix="icon" slot="icon" slot-scope="props"
         :name="props.active ? icon.active_attention:icon.attention"></van-icon>
         <span>信息</span>
@@ -43,6 +43,9 @@
 <script>
 export default {
   name: "navFooter",
+  props: {
+     count: String
+  },
   data() {
     return {
       active: 0,
@@ -62,10 +65,20 @@ export default {
         active_private: "https://i.loli.net/2021/11/04/YM1oz4Jaw6BqtNp.png",
         private: "https://i.loli.net/2021/11/04/7AMDUbLFxaEBQVC.png"
       },
+      num: this.count
     };
   },
+  watch: {
+     count: function() {
+       this.num = this.count;
+     },
+     immediate: true,
+     deep: true,
+  },
   methods: {
-   
+     go() {
+        this.num = "";
+     }
   }
 };
 </script>

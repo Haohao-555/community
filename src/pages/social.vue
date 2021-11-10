@@ -32,6 +32,7 @@
                     :id="item.id"
                     :ava="item.picture"
                     :nickName="item.nickName"
+                    :userName="item.userName"
                     :flag="false"
                     :show="false"
                 />
@@ -42,6 +43,7 @@
                     :ava="item.picture"
                     :nickName="item.nickName"
                     :flag="item.flag"
+                    :userName="item.userName"
                     :show="true"
                 />
             </div>
@@ -52,6 +54,7 @@
                     :id="item.id"
                     :ava="item.picture"
                     :nickName="item.nickName"
+                    :userName="item.userName"
                     :flag="false"
                     :show="false"
                 />
@@ -61,6 +64,7 @@
                     :id="item.id"
                     :ava="item.picture"
                     :nickName="item.nickName"
+                    :userName="item.userName"
                     :flag="item.flag"
                     :show="true"
                 />

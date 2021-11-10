@@ -1,6 +1,6 @@
 <template>
    <div class="nav-header">
-       <div class="left" @click="back">返回</div>
+       <div class="left" @click="back" v-if="show">返回</div>
        <div class="title">
           <slot name="title"></slot>
        </div>
@@ -12,6 +12,12 @@
 <script>
   export default {
       name: "navHeader",
+      props: {
+        show:{
+          type: Boolean,
+          default: true,
+        }
+      },
       methods: {
          back() {
            this.$router.back(-1);

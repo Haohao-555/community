@@ -6,13 +6,13 @@
 -->
 <template>
     <div class="person">
-        <div class="container">
+        <div class="container" @click="personal(userName)">
           <img :src="ava" alt="">
            <div class="info">
                 <span class="nickName">{{nickName}}</span>
                 <span class="content">此人很懒啥都没写</span>
            </div>
-          <span :class="['btn', state? '': 'active']" v-if="show" @click="isfollow(state, id)">{{text}}</span>
+          <span :class="['btn', state? '': 'active']" v-if="show" @click.stop="isfollow(state, id)">{{text}}</span>
       </div> 
     </div>
 </template>
@@ -26,6 +26,7 @@ export default {
     flag: Boolean,
     id: Number,
     show: Boolean,
+    userName: String,
   },
   data() {
     return {
@@ -62,6 +63,14 @@ export default {
         });
       }
     },
+    personal(userName) {
+      this.$router.push({
+         path: "/personal",
+         query: {
+           name: userName
+         }
+      })  
+    }
   },
 };
 </script>

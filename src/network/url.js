@@ -15,6 +15,8 @@ const logout = "/user/logout"
 const userInfo = "/user/getOtherInfo"
 const follow = "/profile/follow"
 const unfollow = "/profile/unfollow"
+const callMyCount = "/atMe/number"
+const callMyBlog = "/atMe/loadMore"
 export {
     loginURL,
     register,
@@ -31,5 +33,7 @@ export {
     logout,
     userInfo,
     unfollow,
-    follow
+    follow,
+    callMyCount,
+    callMyBlog
 }
