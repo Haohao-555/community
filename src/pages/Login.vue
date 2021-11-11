@@ -1,6 +1,7 @@
 <template>
   <div class="login">  
         <div class="container" v-if="!loginState">
+            <img src="https://i.loli.net/2021/11/11/3okYagjKtFWeiIQ.png" alt="">
             <div class="account row">
                 <input type="text" name="" id="" v-model="account" placeholder="请输入账号">
             </div>
@@ -39,9 +40,7 @@ export default {
         userName: "",
       },
       loginState: false,
-      avaUrl: "",
-
-
+      avaUrl: ""
     };
   },
   created() {
@@ -110,10 +109,17 @@ export default {
   .container {
     width: 90vw;
     margin: 0px auto;
-    padding-top: 40px;
+    padding-top: 10px;
     background-color: #fff;
     border-radius: 12px;
     box-shadow: 2px 2px 3px rgba($color: #000000, $alpha: .4);
+    img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      display: block;
+      margin: 0px auto 20px auto;
+    }
     .ava {
       height: 120px;
       width: 120px;

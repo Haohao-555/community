@@ -32,7 +32,7 @@
             </div>
          </div>
         <button @click="register" class="btn">注册</button>
-        <span class="back-login" @click="back">返回</span>
+        <span class="back-login" @click="backLogin">返回</span>
       </div>
       <div class="login" v-if="loginState">
         <div class="info">
@@ -169,6 +169,11 @@ export default {
         path: "/index",
       });
     },
+    backLogin() {
+      this.$router.push({
+        path: "/login",
+      })
+    }
   },
 };
 </script>

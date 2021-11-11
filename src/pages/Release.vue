@@ -25,7 +25,7 @@ import AtTa from "vue-at/dist/vue-at-textarea";
 import { req_follow } from "../network/relation/index.js"
 import { req_createBlog } from "../network/blog/index.js"
 import E from "wangeditor"
-  export default {
+export default {
       name: "Release",
       components: {
          AtTa
