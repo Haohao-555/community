@@ -13,7 +13,7 @@ function formatContent(content) {
     contentFormat = contentFormat.replace(
         constant.REG_FOR_AT_WHO,
         (matchStr, nickName, userName) => {
-            return `<a href='#/personal?name=${userName}' style=color:#c04d00>@${nickName} - ${userName}</a>`
+            return `<a href="/mobile-community/personal?name=${userName}" style=color:#c04d00>@${nickName} - ${userName}</a>`
         }
     )
 

@@ -224,7 +224,7 @@ export default {
       }
       .btn {
         width: 200px;
-        height: 40px;
+        line-height: 100%;
         border-radius: 12px;
         border: none;
         background: none;
@@ -232,6 +232,7 @@ export default {
         display: block;
         background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
         color: #fff;
+        padding: 12px 12px;
       }
     }
     .back-login {

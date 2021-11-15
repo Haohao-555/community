@@ -131,7 +131,7 @@ import formatContent from "../tools/_format.js";
                .van-grid-item__content {
                   img {
                     width: 100px;
-                    height: 100px;
+                    // height: 100px;
                   }
                }
              }

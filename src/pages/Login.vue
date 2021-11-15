@@ -153,7 +153,7 @@ export default {
     }
     .btn {
       width: 200px;
-      height: 40px;
+      line-height: 40px;
       border-radius: 12px;
       border: none;
       background: none;

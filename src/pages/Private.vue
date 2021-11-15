@@ -7,9 +7,9 @@
           <span class="city">城市：{{user.city}}</span>
           <div class="personal" @click="personal">个人主页</div>
           <div class="list">
-            <div class="item" @click="social(2)">关注（{{followerList.count}}）</div>
-            <div class="item" @click="social(1)">粉丝（{{fanList.count}}）</div>
-            <div class="item" @click="personal">说说（{{blogCount}}）</div>
+            <div class="item" @click="social(2)">关注{{followerList.count}}</div>
+            <div class="item" @click="social(1)">粉丝{{fanList.count}}</div>
+            <div class="item" @click="personal">说说{{blogCount}}</div>
             <div class="item">足迹</div>
           </div>
       </div>

@@ -245,10 +245,8 @@ export default {
     margin: 10px auto;
     .item {
       width: 50%;
-      height: 20px;
       padding: 6px 0px;
       border: 1px solid #c04d00;
-      line-height: 20px;
       text-align: center;
       margin-bottom: 20px;
     }

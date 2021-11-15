@@ -8,6 +8,8 @@ import constant from './conf/constant'
 Vue.use(Router)
 
 let router = new Router({
+    mode: "history",
+    base: "/mobile-community/",
     routes: [
         {
             path: '/',
@@ -60,6 +62,10 @@ let router = new Router({
             path: '/social',
             name: 'Social',
             component: () => import('./pages/Social.vue')
+        }, {
+            path: '/newContent',
+            name: "NewContent",
+            component: () => import('./pages/NewContent.vue')
         }
     ]
 })

@@ -23,6 +23,7 @@ import { Toast,
          Area,
          Dialog,
          ShareSheet, 
+         NoticeBar 
 } from 'vant';
 import { Image as VanImage } from 'vant';
 import 'vant/lib/index.css'
@@ -51,6 +52,7 @@ Vue.use(Area)
 Vue.use(Field)
 Vue.use(Dialog)
 Vue.use(ShareSheet)
+Vue.use(NoticeBar)
 // mock开关
 const mock = true;
 if (mock) {
